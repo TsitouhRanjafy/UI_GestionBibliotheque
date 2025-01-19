@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
 import { SingleBookSimpleComponent } from "./single-book-simple/single-book-simple.component";
 import { IBook } from '../../../models/type.model';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ILivreGet } from '../../../models/livre.model';
 
 
 @Component({
@@ -28,7 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class ListComponent{
   
-  @Input({ required: true }) length: number = 0;
+  @Input({ required: false }) length: number = 0;
   pageSize = 7;
   pageIndex = 0;
   @Output() pageIndexChange: EventEmitter<number> = new EventEmitter();
@@ -39,7 +40,7 @@ export class ListComponent{
   disabled = false;
 
   @Input() title: string = 'title';
-  @Input({required : true}) books: IBook[] | undefined;
+  @Input() books: ILivreGet[] = []
 
   handlePageEvent(e: PageEvent) {
     this.length = e.length;

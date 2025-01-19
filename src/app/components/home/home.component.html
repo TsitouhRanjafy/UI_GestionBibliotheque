@@ -14,30 +14,34 @@
             
             <div class="overflow-y-scroll flex flex-col" id="list">
                 <div class="h-full min-h-full">
-                    <app-list 
-                        title="New Release"  
-                        (pageIndexChange)="changePagination($event)" 
-                        [books]="newReleaseBooks"
-                        [length]="lengthNewRelease"
-                    />
+                    @if (newReleaseBooks$ | async; as newReleaseBooks){
+                        @if (numberAllBook$ | async; as numberAllBook ){
+                            <app-list 
+                                title="New Release"  
+                                (pageIndexChange)="changePagination($event)" 
+                                [books]="newReleaseBooks"
+                                [length]="50"
+                            />
+                        }
+                    }
                 </div>
                 
                 <div class="h-full min-h-full">
-                    <app-list 
+                    <!-- <app-list 
                         title="Last borrow" 
                         (pageIndexChange)="changePaginationLS($event)"
                         [books]="lastBorrowBooks" 
                         [length]="lengthLastBorrow"
-                    />
+                    /> -->
                 </div>
 
                 <div class="h-full min-h-full" id="saved">
-                    <app-list 
+                    <!-- <app-list 
                         title="All books" 
                         (pageIndexChange)="changePaginationAll($event)"
                         [books]="AllBooks" 
                         [length]="lengthAllBooks"
-                    />
+                    /> -->
                 </div>
             </div>
 

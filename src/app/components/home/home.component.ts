@@ -31,14 +31,14 @@ import { AsyncPipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
+  numberAllBook$!: Observable<number>;
   topBooks$!: Observable<ILivreGet[]>;
+  newReleaseBooks$!: Observable<ILivreGet[]>;
 
   constructor(private getBookService: GetBookService){}
   
   lastReadingBooks: IBookSingle[] = lastReadingBooksData
   
-  newReleaseBooks: IBook[] = get(0);
-  lengthNewRelease: number = newReleaseBookDb.length
 
   lastBorrowBooks: IBook[] = get(0);
   lengthLastBorrow: number = newReleaseBookDb.length
@@ -46,11 +46,8 @@ export class HomeComponent implements OnInit {
   AllBooks: IBook[] = get(0)
   lengthAllBooks: number = newReleaseBookDb.length
 
-  topBook: IBookTop[] = top()
-  
-
   changePagination(pageIndex: number): void {
-    this.newReleaseBooks = get(pageIndex);
+    // this.newReleaseBooks = get(pageIndex);
   }
 
   changePaginationLS(pageIndex: number): void {
@@ -62,6 +59,9 @@ export class HomeComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.numberAllBook$ = this.getBookService.getNumberAllBook();
     this.topBooks$ = this.getBookService.getTopBooks();
+    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(0)
+
   }
 }

@@ -1,5 +1,6 @@
 import { Component , Input } from '@angular/core';
 import { disponible, genre, IBook } from '../../../../models/type.model';
+import { ILivreGet } from '../../../../models/livre.model';
 
 @Component({
   selector: 'app-single-book-simple',
@@ -11,11 +12,5 @@ import { disponible, genre, IBook } from '../../../../models/type.model';
 export class SingleBookSimpleComponent {
 
 
-  @Input() book: IBook = {
-    title: 'Escarboucle Bleue',
-    author: 'Arthur',
-    genre: genre.Adventure,
-    sortie: new Date(2024,1,1),
-    disponible: disponible.OUI
-  }
+  @Input({ required: true }) book!: ILivreGet;
 }

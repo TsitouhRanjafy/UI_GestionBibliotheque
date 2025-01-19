@@ -12,8 +12,18 @@ export class GetBookService  {
 
   constructor(private http: HttpClient){}
 
+  getNumberAllBook(): Observable<number> {
+    return this.http.get<number>(this.url+'/');
+  }
+
   getTopBooks(): Observable<ILivreGet[]> {
     return this.http.get<ILivreGet[]>(this.url+'/topbooks/3');
   }
+
+  getNewReleaseBook(pageIndex: number): Observable<ILivreGet[]>{
+    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${(pageIndex+1)*7}/3`);
+  }
+
+
 
 } 
