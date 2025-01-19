@@ -42,7 +42,9 @@
             </div>
 
             <div class="relative" id="author">
-                <app-top [topBooks]="topBook" />
+                @if (topBooks$ | async; as topBook){
+                    <app-top [topBooks]="topBook" />
+                }
             </div>
         </section>
 

@@ -1,6 +1,7 @@
 import { Component , Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IBookTop } from '../../../models/type.model';
+import { ILivreGet } from '../../../models/livre.model';
 
 @Component({
   selector: 'app-top',
@@ -14,5 +15,5 @@ import { IBookTop } from '../../../models/type.model';
 export class TopComponent {
 
 
-  @Input() topBooks: IBookTop[] = [] 
+  @Input() topBooks: ILivreGet[] = [] 
 }

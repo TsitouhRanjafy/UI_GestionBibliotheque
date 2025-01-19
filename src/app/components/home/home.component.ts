@@ -1,5 +1,5 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
+import { Component , CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
@@ -8,6 +8,10 @@ import { ListComponent } from "./list/list.component";
 import { IBook, IBookSingle, IBookTop } from '../../models/type.model';
 import { get, newReleaseBookDb, top } from '../../db/newreleasebook.db';
 import { TopComponent } from './top/top.component';
+import { GetBookService } from '../../services/book/get-book.service';
+import { Observable } from 'rxjs';
+import { ILivreGet } from '../../models/livre.model';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -18,14 +22,19 @@ import { TopComponent } from './top/top.component';
     HeaderComponent,
     LastReadingComponent,
     ListComponent,
-    TopComponent
+    TopComponent,
+    AsyncPipe
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+  topBooks$!: Observable<ILivreGet[]>;
+
+  constructor(private getBookService: GetBookService){}
+  
   lastReadingBooks: IBookSingle[] = lastReadingBooksData
   
   newReleaseBooks: IBook[] = get(0);
@@ -47,9 +56,12 @@ export class HomeComponent {
   changePaginationLS(pageIndex: number): void {
     this.lastBorrowBooks = get(pageIndex)
   }
-
+  
   changePaginationAll(pageIndex: number): void {
     this.AllBooks = get(pageIndex)
   }
-
+  
+  ngOnInit(): void {
+    this.topBooks$ = this.getBookService.getTopBooks();
+  }
 }
