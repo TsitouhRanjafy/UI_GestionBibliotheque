@@ -1,0 +1,19 @@
+* {
+    color:#242424;
+    font-weight: bold;
+    font-family: 'Inter',sans-serif;
+}
+
+main{
+    div{
+        // border: 1px solid red;
+        &:nth-child(1){
+            flex: 2;
+        }
+        &:nth-child(2){
+            flex: 1;
+            color: white;
+            background-color: #242424;
+        }
+    }
+}

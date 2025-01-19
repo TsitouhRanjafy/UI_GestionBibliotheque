@@ -1,0 +1,30 @@
+<main class="w-screen h-screen flex flex-row">
+
+    <section class="relative overflow-hidden flex flex-row justify-center items-center" id="salutation">
+        <img class="min-w-max w-max h-full z-0" src="assets/book.jpeg" alt="">
+        <div class="absolute z-10 w-90% h-90% rounded-[40px] flex justify-center items-center">
+            <p class="left-0 top-0 ml-4 mt-4 absolute">Logo.</p>
+            <p class="text-9xl w-min">Let's Get Started.</p>
+        </div>
+    </section>
+
+    <section class="flex flex-row justify-center" id="form">
+        <div class="w-4/5 flex flex-col justify-center gap-5">
+
+            <p class="text-2xl font-bold">Create Account</p>
+            <div class=" p-1 flex flex-row gap-2" id="name">
+                <div class="borer-2 " id="firstname"><app-input name="Firstname"/></div>
+                <div class="borer-2 " id="lastname"><app-input name="Lastname"/></div>
+            </div>
+            <div class=" p-1" id="email"><app-input/></div>
+            <div class=" p-1" id="password"><app-input name="Password"/></div>
+            <div class=" p-1" id="accord"><app-agree-check/></div>
+            <div class=" p-1" id="submit"><app-button router="/home" title="Create Account"/></div>
+            <div class=" p-1" id="google"><app-or/></div>
+            <div class=" p-1" id="or"><app-button textcolor="text-primary" background="bg-whitepropre" title="Sign up With Google" iconPath="assets/icons8-logo-google-48.png"/></div>
+            <div class=" p-1" id="login"><app-already router="/login" question="Already hava account?" solution="Log in"/></div>
+
+        </div>
+    </section>
+
+</main>

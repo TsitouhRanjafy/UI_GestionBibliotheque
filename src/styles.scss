@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b; 
+    border-radius: 15px;
+}
+
+body{
+    background-color: #E1E1E1;
+    scroll-behavior: smooth;
+}

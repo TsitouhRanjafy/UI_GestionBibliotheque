@@ -1,0 +1,8 @@
+<main class="h-full bg-blackprimary w-full rounded-l-2xl rounded-bl-2xl flex flex-col items-start pl-5 pt-5 gap-3 overflow-y-scroll ">
+
+    <div *ngFor="let book of topBooks">
+        <p class="line-clamp-2 text-base font-bold cursor-pointer ">1. {{ book.title }} </p>
+        <p class="text-xs">{{ book.nombre_emprunt }} borrow</p>
+    </div>
+    
+</main>

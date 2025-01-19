@@ -1,0 +1,50 @@
+<main class="flex flex-row py-4 overflow-hidden max-h-screen">
+    <div class="flex flex-col overflow-hidden">
+        <div class=""><app-card-profil lastname="Sarah"/></div>
+        <div class=""><app-menu></app-menu></div>
+    </div>
+    <section class="flex flex-col overflow-hidden">
+
+        <section class="flex flex-col overflow-hidden">
+            <div class=""><app-header/></div>
+            <div class=""><app-last-reading [lastReadingBooks]="lastReadingBooks"/></div>
+        </section>  
+
+        <section #sectionList class="flex flex-row overflow-hidden">
+            
+            <div class="overflow-y-scroll flex flex-col" id="list">
+                <div class="h-full min-h-full">
+                    <app-list 
+                        title="New Release"  
+                        (pageIndexChange)="changePagination($event)" 
+                        [books]="newReleaseBooks"
+                        [length]="lengthNewRelease"
+                    />
+                </div>
+                
+                <div class="h-full min-h-full">
+                    <app-list 
+                        title="Last borrow" 
+                        (pageIndexChange)="changePaginationLS($event)"
+                        [books]="lastBorrowBooks" 
+                        [length]="lengthLastBorrow"
+                    />
+                </div>
+
+                <div class="h-full min-h-full" id="saved">
+                    <app-list 
+                        title="All books" 
+                        (pageIndexChange)="changePaginationAll($event)"
+                        [books]="AllBooks" 
+                        [length]="lengthAllBooks"
+                    />
+                </div>
+            </div>
+
+            <div class="relative" id="author">
+                <app-top [topBooks]="topBook" />
+            </div>
+        </section>
+
+    </section>
+</main>
