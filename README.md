@@ -2,6 +2,21 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
+## Structure
+
+```
+  app/
+    ├── components/     # Composants de l'interface utilisateur (UI)
+    ├── directives/     # Directives Angular personnalisées
+    ├── guards/         # Gardiens (guards) pour la protection des routes
+    ├── interceptors/   # Intercepteurs pour la gestion des requêtes HTTP
+    ├── models/         # Modèles de données utilisés dans l'application
+    ├── pipes/          # Pipes personnalisés pour la transformation des données
+    ├── services/       # Services qui gèrent la logique métier et la communication avec l'API
+    └── utils/          # Utilitaires et fonctions génériques réutilisables
+```
+
+
 ## Development server
 
 Run `ng serve` or `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
