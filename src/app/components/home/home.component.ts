@@ -1,13 +1,13 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
 import { Component , CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
-import { MenuComponent } from '../../component/home/menu/menu.component';
-import { CardProfilComponent } from "../../component/home/card-profil/card-profil.component";
-import { HeaderComponent } from "../../component/home/header/header.component";
-import { LastReadingComponent } from "../../component/home/last-reading/last-reading.component";
-import { ListComponent } from "../../component/home/list/list.component";
+import { MenuComponent } from './menu/menu.component';
+import { CardProfilComponent } from './card-profil/card-profil.component';
+import { HeaderComponent } from "./header/header.component";
+import { LastReadingComponent } from "./last-reading/last-reading.component";
+import { ListComponent } from "./list/list.component";
 import { IBook, IBookSingle, IBookTop } from '../../models/type.model';
 import { get, newReleaseBookDb, top } from '../../db/newreleasebook.db';
-import { TopComponent } from '../../component/home/top/top.component';
+import { TopComponent } from './top/top.component';
 
 @Component({
   selector: 'app-home',
