@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   numberAllBook$!: Observable<number>;
   topBooks$!: Observable<ILivreGet[]>;
   newReleaseBooks$!: Observable<ILivreGet[]>;
+  pageIndex: number = 0;
 
   constructor(private getBookService: GetBookService){}
   
@@ -46,8 +47,20 @@ export class HomeComponent implements OnInit {
   AllBooks: IBook[] = get(0)
   lengthAllBooks: number = newReleaseBookDb.length
 
-  changePagination(pageIndex: number): void {
-    // this.newReleaseBooks = get(pageIndex);
+  nextPageIndex(): void {
+    console.log(this.pageIndex);
+    this.pageIndex++;
+    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndex);
+    this.newReleaseBooks$.subscribe((value => {
+      console.log(value);
+    }))
+  }
+  prevPageIndex(): void {
+    this.pageIndex--;
+    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndex);
+    this.newReleaseBooks$.subscribe((value => {
+      console.log(value);
+    }))
   }
 
   changePaginationLS(pageIndex: number): void {
@@ -61,7 +74,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.numberAllBook$ = this.getBookService.getNumberAllBook();
     this.topBooks$ = this.getBookService.getTopBooks();
-    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(0)
-
+    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(0);
   }
 }

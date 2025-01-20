@@ -1,9 +1,7 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from '@angular/core';
 import { SingleBookSimpleComponent } from "./single-book-simple/single-book-simple.component";
-import { IBook } from '../../../models/type.model';
 import { CommonModule } from '@angular/common';
-import { PageEvent, MatPaginatorModule} from '@angular/material/paginator';
-import {JsonPipe} from '@angular/common';
+import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -29,27 +27,22 @@ import { ILivreGet } from '../../../models/livre.model';
 })
 export class ListComponent{
   
-  @Input({ required: false }) length: number = 0;
-  pageSize = 7;
-  pageIndex = 0;
-  @Output() pageIndexChange: EventEmitter<number> = new EventEmitter();
-
-  hidePageSize = true;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
-
   @Input() title: string = 'title';
   @Input() books: ILivreGet[] = []
 
-  handlePageEvent(e: PageEvent) {
-    this.length = e.length;
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-    this.pageIndexChange.emit(this.pageIndex)
+  @Output() prevPageIndex: EventEmitter<void> = new EventEmitter();
+  @Output() nextPageIndex: EventEmitter<void> = new EventEmitter();
+  @Input() pageIndex: number = 0;
+  @Input({ required: false }) length: number = 0;
+  pageSize = 7;
 
+
+  prevPage(): void {
+    this.prevPageIndex.emit();
   }
 
-
+  nextPage(): void {
+    this.nextPageIndex.emit();
+  }
 
 }

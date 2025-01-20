@@ -1,18 +1,29 @@
 <main class="flex flex-col w-full h-full overflow-hidden">
     <div class="flex justify-between">
         <p class=" font-bold text-lg items-center mt-1">{{ title }}</p> 
-        <div class="pr-2 flex flex-row  ">
-            <mat-paginator #paginator
-               class="demo-paginator"
-               (page)="handlePageEvent($event)"
-               [length]="length"
-               [pageSize]="pageSize"
-               [disabled]="disabled"
-               [hidePageSize]="true"
-               [pageIndex]="pageIndex"
-            >
-            </mat-paginator>
+        <div class="pr-2 flex flex-row  items-center gap-1">
 
+            <svg 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="size-6 rounded-md p-1 hover:bg-bluehover active:bg-blueactive"
+                (click)="prevPage()"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+              
+            <svg 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="size-6 rounded-md p-1 hover:bg-bluehover active:bg-blueactive"
+                (click)="nextPage()"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>              
         </div>  
     </div>
     
