@@ -1,12 +1,12 @@
-<main class="w-full flex flex-col gap-1 justify-center items-center px-5 py-2 rounded-xl hover:bg-bluehover active:bg-blueactive ">
+<main class="w-full flex flex-col justify-center items-center py-2 ">
     <div class="overflow-hidden rounded-xl h-book w-book select-none ">
         <img class="h-full w-full" src="assets/escarboucle bleue.jpg" alt="">
     </div>
-    <div class="w-book h-16 overflow-hidden text-ellipsis text-nowrap line-clamp-2 select-none font-bold leading-none">
-        {{ book.titre }}
-        <p class="text-sm font-medium text-nowrap mt-1">{{ book.auteur }}</p>
+    <div class="w-book h-16 overflow-hidden select-none mt-1">
+        <p class="text-xs font-bold line-clamp-3">{{ book.titre }}</p>
+        <p class="text-[9px] font-medium text-nowrap">{{ book.auteur }}</p>
     </div>
     <div class="w-book flex flex-row justify-center rounded-xl">
-        <p class="bg-blackprimary rounded-full text-xs px-2 select-none line-clamp-1">{{ book.genre }}</p>
+        <p class="bg-blackprimary rounded-full text-[9px] px-2 select-none line-clamp-1">{{ book.genre }}</p>
     </div>
 </main>
