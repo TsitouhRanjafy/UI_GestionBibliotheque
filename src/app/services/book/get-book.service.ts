@@ -21,7 +21,7 @@ export class GetBookService  {
   }
 
   getNewReleaseBook(pageIndex: number): Observable<ILivreGet[]>{
-    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${(pageIndex+1)*7}/3`);
+    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${7}/4`);
   }
 
 

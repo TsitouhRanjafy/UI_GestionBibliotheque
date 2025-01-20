@@ -1,4 +1,4 @@
 <main class="w-full h-fit">
     <label class="font-bold text-base" *ngIf="haveLabel" [for]="name.toLocaleLowerCase()">{{ name }}</label><br>
-    <input class="w-full h-11 px-2 rounded-lg focus:outline-none" [placeholder]="name" [type]="type" id="email" [name]="name.toLocaleLowerCase()">
+    <input class="w-full h-11 px-2 rounded-lg focus:outline-none" [placeholder]="name" [type]="type" [id]="name" [name]="name.toLocaleLowerCase()">
 </main>
