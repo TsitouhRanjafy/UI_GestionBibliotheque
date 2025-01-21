@@ -1,5 +1,5 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component , CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
@@ -9,7 +9,7 @@ import { IBook, IBookSingle, IBookTop } from '../../models/type.model';
 import { get, newReleaseBookDb, top } from '../../db/newreleasebook.db';
 import { TopComponent } from './top/top.component';
 import { GetBookService } from '../../services/book/get-book.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ILivreGet } from '../../models/livre.model';
 import { AsyncPipe } from '@angular/common';
 
@@ -31,10 +31,11 @@ import { AsyncPipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  numberAllBook$!: Observable<number>;
+  numberAllBook$!: Observable<Object>;
   topBooks$!: Observable<ILivreGet[]>;
   newReleaseBooks$!: Observable<ILivreGet[]>;
   pageIndex: number = 0;
+  maxPageIndex: number = 0;
 
   constructor(private getBookService: GetBookService){}
   
@@ -47,30 +48,11 @@ export class HomeComponent implements OnInit {
   AllBooks: IBook[] = get(0)
   lengthAllBooks: number = newReleaseBookDb.length
 
-  nextPageIndex(): void {
-    console.log(this.pageIndex);
-    this.pageIndex++;
+  changePageIndex(value: boolean): void {
+    (value)? this.pageIndex++ : this.pageIndex--;
     this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndex);
-    this.newReleaseBooks$.subscribe((value => {
-      console.log(value);
-    }))
-  }
-  prevPageIndex(): void {
-    this.pageIndex--;
-    this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndex);
-    this.newReleaseBooks$.subscribe((value => {
-      console.log(value);
-    }))
   }
 
-  changePaginationLS(pageIndex: number): void {
-    this.lastBorrowBooks = get(pageIndex)
-  }
-  
-  changePaginationAll(pageIndex: number): void {
-    this.AllBooks = get(pageIndex)
-  }
-  
   ngOnInit(): void {
     this.numberAllBook$ = this.getBookService.getNumberAllBook();
     this.topBooks$ = this.getBookService.getTopBooks();

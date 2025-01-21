@@ -29,7 +29,7 @@
         <div 
             class="w-fit min-w-fit items-center flex flex-col justify-center px-4 hover:bg-bluehover active:bg-blueactive rounded-xl" 
             *ngFor="let book of books" >
-            <app-single-book-simple [book]="book"/>
+            <app-single-book-simple [imageUrl]="book.image_name || 'undefinied' " [book]="book"/>
         </div>    
     </div>
     

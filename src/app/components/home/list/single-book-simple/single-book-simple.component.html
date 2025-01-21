@@ -1,6 +1,10 @@
 <main class="w-full flex flex-col justify-center items-center py-2 ">
     <div class="overflow-hidden rounded-xl h-book w-book select-none ">
-        <img class="h-full w-full" src="assets/escarboucle bleue.jpg" alt="">
+        @if (imageUrl) {
+            <img class="h-full w-full" [src]='imageUrl' alt="">
+        } @else {
+            <p class="text-xs flex items-center text-center text-whitepropre h-full m-auto bg-primary">Aucun image disponible</p>
+        }
     </div>
     <div class="w-book h-16 overflow-hidden select-none mt-1">
         <p class="text-xs font-bold line-clamp-3">{{ book.titre }}</p>

@@ -13,4 +13,12 @@ export class SingleBookSimpleComponent {
 
 
   @Input({ required: true }) book!: ILivreGet;
+  @Input({
+    transform: imageNameToImageUrl
+  }) imageUrl: string | undefined;
+
+}
+
+function imageNameToImageUrl(value: string): string | undefined {
+  return (value=='imageurl')? undefined : 'image/'+value+'.jpeg';
 }

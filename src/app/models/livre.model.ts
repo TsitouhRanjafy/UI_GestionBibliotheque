@@ -6,6 +6,7 @@ export interface ILivreGet {
     disponible: string,
     genre: string,
     nombre_emprunts: number,
+    image_name: string | null,
     createdAt: Date,
     updatedAt: Date,
     deletedAt: Date | null

@@ -18,10 +18,9 @@
                         @if (numberAllBook$ | async; as numberAllBook ){
                             <app-list 
                                 title="New Release"  
-                                (prevPageIndex)="prevPageIndex()"
-                                (nextPageIndex)="nextPageIndex()"
+                                (changePageIndex)="changePageIndex($event)"
                                 [books]="newReleaseBooks"
-                                [length]="50"
+                                [maxPageIndex]="maxPageIndex"
                                 [pageIndex]="pageIndex"
                             />
                         }

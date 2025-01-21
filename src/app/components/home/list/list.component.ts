@@ -30,19 +30,18 @@ export class ListComponent{
   @Input() title: string = 'title';
   @Input() books: ILivreGet[] = []
 
-  @Output() prevPageIndex: EventEmitter<void> = new EventEmitter();
-  @Output() nextPageIndex: EventEmitter<void> = new EventEmitter();
+  @Output() changePageIndex: EventEmitter<boolean> = new EventEmitter();
   @Input() pageIndex: number = 0;
-  @Input({ required: false }) length: number = 0;
+  @Input() maxPageIndex: number = 0;
   pageSize = 7;
 
 
   prevPage(): void {
-    this.prevPageIndex.emit();
+    this.changePageIndex.emit(false);
   }
 
   nextPage(): void {
-    this.nextPageIndex.emit();
+    this.changePageIndex.emit(true);
   }
 
 }

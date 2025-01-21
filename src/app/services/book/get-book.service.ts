@@ -1,7 +1,7 @@
-import { inject, Injectable, OnInit, signal, WritableSignal } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { ILivreGet } from '../../models/livre.model';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class GetBookService  {
 
   constructor(private http: HttpClient){}
 
-  getNumberAllBook(): Observable<number> {
-    return this.http.get<number>(this.url+'/');
+  getNumberAllBook(): Observable<Object> {
+    return this.http.get<Object>(this.url + '/')
   }
 
   getTopBooks(): Observable<ILivreGet[]> {
