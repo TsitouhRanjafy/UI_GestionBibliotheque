@@ -24,6 +24,12 @@ export class GetBookService  {
     return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${7}/4`);
   }
 
+  getLastBorrowBook(): Observable<ILivreGet[]> {
+    return this.http.get<ILivreGet[]>(this.url+'/books/lastborrow');
+  }
 
+  getAllBook(pageIndex: number){
+    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${7}`);
+  }
 
 } 

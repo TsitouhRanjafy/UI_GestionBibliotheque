@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ILivreGet } from '../../../models/livre.model';
+import { IBooleanAndStringObject, titleOfList } from '../../../models/type.model';
 
 
 @Component({
@@ -27,21 +28,21 @@ import { ILivreGet } from '../../../models/livre.model';
 })
 export class ListComponent{
   
-  @Input() title: string = 'title';
+  @Input() title: titleOfList = titleOfList.NewRelease;
   @Input() books: ILivreGet[] = []
 
-  @Output() changePageIndex: EventEmitter<boolean> = new EventEmitter();
+  @Output() changePageIndex: EventEmitter<IBooleanAndStringObject> = new EventEmitter();
   @Input() pageIndex: number = 0;
   @Input() maxPageIndex: number = 0;
   pageSize = 7;
 
 
   prevPage(): void {
-    this.changePageIndex.emit(false);
+    this.changePageIndex.emit({isNext: false,title: this.title});
   }
 
   nextPage(): void {
-    this.changePageIndex.emit(true);
+    this.changePageIndex.emit({isNext: true,title: this.title});
   }
 
 }

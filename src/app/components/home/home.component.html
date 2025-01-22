@@ -17,32 +17,36 @@
                     @if (newReleaseBooks$ | async; as newReleaseBooks){
                         @if (numberAllBook$ | async; as numberAllBook ){
                             <app-list 
-                                title="New Release"  
+                                [title]="titleOfist.NewRelease"  
                                 (changePageIndex)="changePageIndex($event)"
                                 [books]="newReleaseBooks"
                                 [maxPageIndex]="maxPageIndex"
-                                [pageIndex]="pageIndex"
+                                [pageIndex]="pageIndexNewRelease"
                             />
                         }
                     }
                 </div>
                 
                 <div class="h-full min-h-full">
-                    <!-- <app-list 
-                        title="Last borrow" 
-                        (pageIndexChange)="changePaginationLS($event)"
-                        [books]="lastBorrowBooks" 
-                        [length]="lengthLastBorrow"
-                    /> -->
+                    @if (lastBorrowBooks$ | async; as lastBorrowBooks) {
+                        <app-list 
+                            [title]="titleOfist.LastBorrow"  
+                            (changePageIndex)="changePageIndex($event)"
+                            [books]="lastBorrowBooks" 
+                            [pageIndex]="pageIndexLastBorrow"
+                        />
+                    }
                 </div>
 
                 <div class="h-full min-h-full" id="saved">
-                    <!-- <app-list 
-                        title="All books" 
-                        (pageIndexChange)="changePaginationAll($event)"
-                        [books]="AllBooks" 
-                        [length]="lengthAllBooks"
-                    /> -->
+                    @if (allBook$ | async; as allBook) {
+                        <app-list 
+                            [title]="titleOfist.AllBook" 
+                            (changePageIndex)="changePageIndex($event)"
+                            [books]="allBook" 
+                            [pageIndex]="pageIndexAllBook"
+                        />
+                    }
                 </div>
             </div>
 

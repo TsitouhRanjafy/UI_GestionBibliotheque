@@ -1,3 +1,14 @@
+export interface IBooleanAndStringObject {
+    isNext: boolean,
+    title: titleOfList
+}
+
+export enum titleOfList {
+    NewRelease = 'New Release',
+    LastBorrow = 'Last Borrow',
+    AllBook ='All Book'
+}
+
 export interface IEventEmitNotification {
     title: string,
     status: boolean

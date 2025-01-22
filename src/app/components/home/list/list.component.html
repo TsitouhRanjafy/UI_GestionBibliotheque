@@ -25,11 +25,11 @@
         </div>  
     </div>
     
-    <div class="flex flex-row justify-between w-full h-full items-center">
+    <div class="flex flex-row justify-start overflow-hidden w-full h-full items-center">
         <div 
             class="w-fit min-w-fit items-center flex flex-col justify-center px-4 hover:bg-bluehover active:bg-blueactive rounded-xl" 
             *ngFor="let book of books" >
-            <app-single-book-simple [imageUrl]="book.image_name || 'undefinied' " [book]="book"/>
+            <app-single-book-simple [imageUrl]="book.id || 'undefinied' " [book]="book"/>
         </div>    
     </div>
     
