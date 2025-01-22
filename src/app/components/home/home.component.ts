@@ -51,9 +51,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private getBookService: GetBookService){}
   
-  
-
-
   changePageIndex(value: IBooleanAndStringObject): void {
     switch (value.title) {
       case titleOfList.NewRelease:
