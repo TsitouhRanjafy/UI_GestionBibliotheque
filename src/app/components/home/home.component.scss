@@ -13,13 +13,13 @@ main{
         }
     }
     section{
-        flex: 5;
+        // flex: 5;
         // border: 1px rgb(217, 255, 0) solid;
         section{
             // border: 1px green solid;
             &:nth-child(1){
                 
-                flex: 2.3;
+                // flex: 2.3;
                 div{
                     // border: 1px yellow solid;
                     &:nth-child(1){
@@ -31,7 +31,7 @@ main{
                 }
             }
             &:nth-child(2){
-                flex: 2.6;
+                // flex: 2.6;
                 div{
                     // border: 1px aqua solid;
                     &#list{

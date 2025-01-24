@@ -32,6 +32,10 @@ module.exports = {
       },
       maxHeight: {
         'screen':'100vh'
+      },
+      flex: {
+        '2.7':'2.7',
+        '2.3':'2.3'
       }
     },
   },

@@ -1,18 +1,19 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, model, OnInit, Output, Signal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
 import { LastReadingComponent } from "./last-reading/last-reading.component";
 import { ListComponent } from "./list/list.component";
-import { IBook, IBookSingle, IBookTop, IBooleanAndStringObject } from '../../models/type.model';
-import { get, newReleaseBookDb, top } from '../../db/newreleasebook.db';
+import { IBookSingle, IBooleanAndStringObject } from '../../models/type.model';
 import { TopComponent } from './top/top.component';
 import { GetBookService } from '../../services/book/get-book.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ILivreGet } from '../../models/livre.model';
 import { AsyncPipe } from '@angular/common';
 import { titleOfList } from '../../models/type.model';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ import { titleOfList } from '../../models/type.model';
     ListComponent,
     TopComponent,
     AsyncPipe,
+    NgClass
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -46,6 +48,9 @@ export class HomeComponent implements OnInit {
 
   allBook$!: Observable<ILivreGet[]>;
   pageIndexAllBook: number = 0;
+
+  search = model('');
+  searchResult = computed(() => { return this.searchBooks(this.search())});
 
   lastReadingBooks: IBookSingle[] = lastReadingBooksData
 
@@ -93,5 +98,10 @@ export class HomeComponent implements OnInit {
     this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexNewRelease);
     this.lastBorrowBooks$ = this.getBookService.getLastBorrowBook();
     this.allBook$ = this.getBookService.getAllBook(this.pageIndexAllBook);
+  }
+
+  searchBooks(value: string): string | undefined {
+    if (!value) return undefined;
+    return "recherche en cours";
   }
 }

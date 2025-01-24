@@ -6,7 +6,8 @@ export interface IBooleanAndStringObject {
 export enum titleOfList {
     NewRelease = 'New Release',
     LastBorrow = 'Last Borrow',
-    AllBook ='All Book'
+    AllBook ='All Book',
+    undefined = ''
 }
 
 export interface IEventEmitNotification {

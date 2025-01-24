@@ -9,7 +9,11 @@
         <div class="flex flex-row" id="outils">
             <div class="flex flex-row justify-evenly items-center ml-20 mr-10 overflow-hidden w-full">
                 <div class="w-96">
-                    <app-search-bar class="left-0"/>
+                    <app-search-bar
+                        class="left-0"
+                        [(search)]="search"
+                        (searchCliked)="searchCliked($event)"
+                     />
                 </div>
                 <app-text-notification 
                     class="cursor-pointer" 

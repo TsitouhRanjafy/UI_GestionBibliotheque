@@ -28,13 +28,14 @@ import { IBooleanAndStringObject, titleOfList } from '../../../models/type.model
 })
 export class ListComponent{
   
-  @Input() title: titleOfList = titleOfList.NewRelease;
+  @Input() title: titleOfList = titleOfList.undefined;
   @Input() books: ILivreGet[] = []
 
-  @Output() changePageIndex: EventEmitter<IBooleanAndStringObject> = new EventEmitter();
-  @Input() pageIndex: number = 0;
   @Input() maxPageIndex: number = 0;
+  @Input() pageIndex: number = 0;
   pageSize = 7;
+  @Output() changePageIndex: EventEmitter<IBooleanAndStringObject> = new EventEmitter();
+  @Input() pagination: boolean = true;
 
 
   prevPage(): void {

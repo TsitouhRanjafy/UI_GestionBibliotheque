@@ -3,14 +3,33 @@
         <div class=""><app-card-profil lastname="Sarah"/></div>
         <div class=""><app-menu></app-menu></div>
     </div>
-    <section class="flex flex-col overflow-hidden">
+    <section class="flex flex-[5] flex-col overflow-hidden" >
 
-        <section class="flex flex-col overflow-hidden">
-            <div class=""><app-header/></div>
-            <div class=""><app-last-reading [lastReadingBooks]="lastReadingBooks"/></div>
+        <section class="flex border-2 flex-col overflow-hidden" [ngClass]=" search()? 'flex-[2.7]':'flex-[2.3]' ">
+            <div class="">
+                <app-header
+                    [(search)]="search"
+                    (searchBook)="searchBooks($event)"
+                />
+            </div>
+            <div class="border-2 border-redpropre">
+                @if ( search()){
+                    @if (newReleaseBooks$ | async;as newReleaseBooks) {
+                        <app-list 
+                            (changePageIndex)="changePageIndex($event)"
+                            [books]="newReleaseBooks"
+                            [maxPageIndex]="maxPageIndex"
+                            [pageIndex]="pageIndexNewRelease"
+                            [pagination]="false"
+                        />
+                    }
+                } @else {
+                    <app-last-reading [lastReadingBooks]="lastReadingBooks"/>
+                } 
+            </div>
         </section>  
 
-        <section #sectionList class="flex flex-row overflow-hidden">
+        <section #sectionList class="flex flex-row overflow-hidden" [ngClass]="search()? 'flex-[2.3]':'flex-[2.6]' " >
             
             <div class="overflow-y-scroll flex flex-col" id="list">
                 <div class="h-full min-h-full">

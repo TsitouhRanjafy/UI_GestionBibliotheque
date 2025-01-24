@@ -1,4 +1,4 @@
-import { Component , Input} from '@angular/core';
+import { Component , EventEmitter, Input, model, Output} from '@angular/core';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { TextNotificationComponent } from './text-notification/text-notification.component';
 import { LogoComponent } from "./logo/logo.component";
@@ -27,6 +27,8 @@ export class HeaderComponent {
   @Input() newRelease: boolean = true;
   @Input() featured: boolean = true;
 
+  search = model<string>();
+  @Output() searchBook : EventEmitter<string> = new EventEmitter() 
 
   toggleCardNotification(value: IEventEmitNotification){
     switch (value.title) {
@@ -61,5 +63,9 @@ export class HeaderComponent {
   hiddenNotificationCard(){
     this.showRelease = false;
     this.showFeatured = false;
+  }
+
+  searchCliked(value: string): void {
+    this.searchBook.emit(value);
   }
 }
