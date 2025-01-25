@@ -1,5 +1,5 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, model, OnInit, Output, Signal } from '@angular/core';
+import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
@@ -10,7 +10,7 @@ import { TopComponent } from './top/top.component';
 import { GetBookService } from '../../services/book/get-book.service';
 import { Observable } from 'rxjs';
 import { ILivreGet } from '../../models/livre.model';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { titleOfList } from '../../models/type.model';
 import { NgClass } from '@angular/common';
 
@@ -22,11 +22,12 @@ import { NgClass } from '@angular/common';
     MenuComponent,
     CardProfilComponent,
     HeaderComponent,
-    LastReadingComponent,
     ListComponent,
     TopComponent,
     AsyncPipe,
-    NgClass
+    NgClass,
+    CommonModule,
+    LastReadingComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -36,26 +37,39 @@ export class HomeComponent implements OnInit {
 
   numberAllBook$!: Observable<Object>;
   titleOfist = titleOfList
+  
+  lastLoanBooksByUser: Signal<ILivreGet[] | undefined> = computed(() => this.getBookService.lastBooksYouBorrow()) 
 
   topBooks$!: Observable<ILivreGet[]>;
 
+  // pour le new release
   newReleaseBooks$!: Observable<ILivreGet[]>;
   pageIndexNewRelease: number = 0;
   maxPageIndex: number = 0;
 
+  // pour le last loan book
   lastBorrowBooks$!: Observable<ILivreGet[]>;
   pageIndexLastBorrow: number = 0;
 
-  allBook$!: Observable<ILivreGet[]>;
+  // pour le all book
+  allBooksByPageIndex$!: Observable<ILivreGet[]>;
   pageIndexAllBook: number = 0;
+  
 
+  // pour le recherche
   search = model('');
-  searchResult = computed(() => { return this.searchBooks(this.search())});
-
-  lastReadingBooks: IBookSingle[] = lastReadingBooksData
+  // tout nos Livre dans BD
+  allBooks?: ILivreGet[];
+  // resultat de recherche quand le search change
+  searchResultBySearchChange = computed(() =>   this.allBooks?.filter((book) => book.titre.includes(this.search()) ));
+  // resultat de recherche quand button search cliked 
+  searchResultByClikedButton = signal<ILivreGet[]>([]) ;
+  // ecoute le resultat du recherche quand le button search est clické
+  searchResultBySearchResultByClkedButton = computed(() => this.searchResultByClikedButton()) 
 
   constructor(private getBookService: GetBookService){}
   
+  // qui gérer le changement de pagination de tout (new Release,all Book,Loan Last)
   changePageIndex(value: IBooleanAndStringObject): void {
     switch (value.title) {
       case titleOfList.NewRelease:
@@ -79,10 +93,10 @@ export class HomeComponent implements OnInit {
       case titleOfList.AllBook:
         if (value.isNext){
           this.pageIndexAllBook++
-          this.allBook$ = this.getBookService.getNewReleaseBook(this.pageIndexAllBook);
+          this.allBooksByPageIndex$ = this.getBookService.getNewReleaseBook(this.pageIndexAllBook);
         }  else if (this.pageIndexAllBook > 0) {
           this.pageIndexAllBook--
-          this.allBook$ = this.getBookService.getNewReleaseBook(this.pageIndexAllBook);
+          this.allBooksByPageIndex$ = this.getBookService.getNewReleaseBook(this.pageIndexAllBook);
         }
         break;
     
@@ -97,11 +111,18 @@ export class HomeComponent implements OnInit {
     this.topBooks$ = this.getBookService.getTopBooks();
     this.newReleaseBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexNewRelease);
     this.lastBorrowBooks$ = this.getBookService.getLastBorrowBook();
-    this.allBook$ = this.getBookService.getAllBook(this.pageIndexAllBook);
+    this.allBooksByPageIndex$ = this.getBookService.getAllBooksByPageIndex(this.pageIndexAllBook);
+    this.getBookService.getAllBooks().subscribe({
+      next: (data: ILivreGet[]) => {
+        this.allBooks = data;
+      }
+    })
+    this.getBookService.getLastBookBorrowByUserId();
   }
 
-  searchBooks(value: string): string | undefined {
-    if (!value) return undefined;
-    return "recherche en cours";
+  searchBooksByButtonCliked(value: string): void{
+    const result = this.allBooks?.filter((book) => book.titre.includes(value))
+    if (result) this.searchResultByClikedButton.set(result);
   }
+
 }

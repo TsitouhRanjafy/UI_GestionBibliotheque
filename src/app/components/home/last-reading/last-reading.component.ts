@@ -3,6 +3,7 @@ import { SingleBookDetailsComponent } from "./single-book-details/single-book-de
 import { genre, IBookSingle } from '../../../models/type.model';
 import { CommonModule } from '@angular/common';
 import { unescape } from 'querystring';
+import { ILivreGet } from '../../../models/livre.model';
 
 
 @Component({
@@ -21,17 +22,6 @@ export class LastReadingComponent {
   moreORhide: string = 'more';
   isEnableToNavigate: boolean = false;
 
-  @Input() lastReadingBooks: IBookSingle[] = [
-    {
-      title: 'Title Harry potter book',
-      genre: genre.Fantastic,
-      dateRetour: new Date 
-    }
-  ]
-
-  // toggleHidden(): void {
-  //   this.isEnableToNavigate = !this.isEnableToNavigate
-  //   this.moreORhide = this.isEnableToNavigate? 'hide' : 'more'
-  // }
+  @Input() lastReadingBooks: ILivreGet[] | undefined = []
 
 }

@@ -21,6 +21,6 @@ export class SearchBarComponent {
 
   testk(): void {
     console.log("testetstets");
-    
   }
+
 }

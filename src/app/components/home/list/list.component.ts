@@ -29,7 +29,7 @@ import { IBooleanAndStringObject, titleOfList } from '../../../models/type.model
 export class ListComponent{
   
   @Input() title: titleOfList = titleOfList.undefined;
-  @Input() books: ILivreGet[] = []
+  @Input() books: ILivreGet[] | undefined = []
 
   @Input() maxPageIndex: number = 0;
   @Input() pageIndex: number = 0;

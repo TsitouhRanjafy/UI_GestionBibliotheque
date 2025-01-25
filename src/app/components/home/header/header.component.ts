@@ -68,4 +68,5 @@ export class HeaderComponent {
   searchCliked(value: string): void {
     this.searchBook.emit(value);
   }
+
 }

@@ -11,7 +11,7 @@ import { genre, IBookSingle } from '../../../../models/type.model';
 export class SingleBookDetailsComponent {
 
   @Input() title: string = 'Title Harry potter book';
-  @Input() genre: genre = genre.Fantastic
+  @Input() genre: string = ''
   @Input() dateRetoure: Date = new Date
 
 }

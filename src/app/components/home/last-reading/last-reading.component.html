@@ -11,9 +11,11 @@
         [pagination]="false"
 
     >       
-        <swiper-slide class="w-1/2 h-full " *ngFor="let lastReadingBook of lastReadingBooks">
-            <app-single-book-details [title]="lastReadingBook.title" [genre]="lastReadingBook.genre" [dateRetoure]="lastReadingBook.dateRetour"/>  
-        </swiper-slide>
+        @if (lastReadingBooks) {
+            <swiper-slide class="w-1/2 h-full " *ngFor="let lastReadingBook of lastReadingBooks">
+                <app-single-book-details [title]="lastReadingBook.titre" [genre]="lastReadingBook.genre"/>  
+            </swiper-slide>
+        }
 
     </swiper-container>
 </main>

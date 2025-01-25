@@ -5,26 +5,38 @@
     </div>
     <section class="flex flex-[5] flex-col overflow-hidden" >
 
-        <section class="flex border-2 flex-col overflow-hidden" [ngClass]=" search()? 'flex-[2.7]':'flex-[2.3]' ">
+        <section class="flex flex-col overflow-hidden" [ngClass]=" search()? 'flex-[2.7]':'flex-[2.3]' ">
             <div class="">
                 <app-header
                     [(search)]="search"
-                    (searchBook)="searchBooks($event)"
+                    (searchBook)="searchBooksByButtonCliked($event)"
                 />
             </div>
-            <div class="border-2 border-redpropre">
-                @if ( search()){
-                    @if (newReleaseBooks$ | async;as newReleaseBooks) {
+            <div class="">      
+                @if ( search() ){
+                    @if (searchResultBySearchResultByClkedButton().length != 0){
                         <app-list 
                             (changePageIndex)="changePageIndex($event)"
-                            [books]="newReleaseBooks"
+                            [books]="searchResultBySearchResultByClkedButton()"
                             [maxPageIndex]="maxPageIndex"
                             [pageIndex]="pageIndexNewRelease"
                             [pagination]="false"
                         />
+                    } @else {   
+                        @if (searchResultBySearchChange()?.length == 0){
+                            <p>Not Found!</p>
+                        } @else {
+                            <app-list 
+                                (changePageIndex)="changePageIndex($event)"
+                                [books]="searchResultBySearchChange()"
+                                [maxPageIndex]="maxPageIndex"
+                                [pageIndex]="pageIndexNewRelease"
+                                [pagination]="false"
+                            />
+                        }
                     }
                 } @else {
-                    <app-last-reading [lastReadingBooks]="lastReadingBooks"/>
+                    <app-last-reading [lastReadingBooks]="lastLoanBooksByUser()"/>
                 } 
             </div>
         </section>  
@@ -58,11 +70,11 @@
                 </div>
 
                 <div class="h-full min-h-full" id="saved">
-                    @if (allBook$ | async; as allBook) {
+                    @if (allBooksByPageIndex$ | async; as allBooksByPageIndex) {
                         <app-list 
                             [title]="titleOfist.AllBook" 
                             (changePageIndex)="changePageIndex($event)"
-                            [books]="allBook" 
+                            [books]="allBooksByPageIndex" 
                             [pageIndex]="pageIndexAllBook"
                         />
                     }
