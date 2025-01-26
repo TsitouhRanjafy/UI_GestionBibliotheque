@@ -7,19 +7,48 @@
             <p>Please enter your login details to log in</p>
 
             <div class="flex flex-col">
-                <div class=" p-1" id="email"><app-input name="Email Adress" [haveLabel]="haveLabelInput"/></div>
-                <div class=" p-1" id="password"><app-input name="Password" [haveLabel]="haveLabelInput"/></div>
+                <div class=" p-1" id="email">
+                    <app-input 
+                        name="Email Adress" 
+                        [haveLabel]="haveLabelInput"
+                        [value]="email"
+                    />
+                </div>
+                <div class=" p-1" id="password">
+                        <app-input 
+                            name="Password" 
+                            [haveLabel]="haveLabelInput"
+                            (onShowPassword)="onShowPassword()"
+                            [type]="toggleShowPassword"
+                            [value]="password"
+                        />
+                </div>
                 <a class="text-right font-semibold text-sm text-blue cursor-pointer">Forgot password?</a>
-                <div class=" p-1" id="accord"><app-agree-check acccord="Keep me logged in"/></div>
+                <div class=" p-1" id="accord">
+                    <app-agree-check acccord="Keep me logged in" [isCheked]="isCheked" />
+                </div>
             </div>
             
             <div class="flex flex-col">
-                <div class=" p-1" id="submit"><app-button router="/home" title="Log in"/></div>
-                <div class=" p-1" id="login"><app-already router="/signup" question="Don't have an account?" solution="Sign up"/></div>
+                <div class=" p-1" id="submit">
+                    <app-button title="Log in" (onButtonCliked)="onSubmit()" />
+                </div>
+                <div class=" p-1" id="login">
+                    <app-already router="/signup" question="Don't have an account?" solution="Sign up"/>
+                </div>
             </div>            
 
-            <div class=" p-1" id="google"><app-or/></div>
-            <div class=" p-1" id="or"><app-button textcolor="text-primary" background="bg-whitepropre" title="Log in With Google" iconPath="assets/icons8-logo-google-48.png"/></div>
+            <div class=" p-1" id="google">
+                <app-or/>
+            </div>
+            <div class=" p-1" id="or">
+                <app-button 
+                    textcolor="text-primary" 
+                    background="bg-whitepropre" t
+                    itle="Log in With Google" 
+                    iconPath="assets/icons8-logo-google-48.png"
+                />
+            </div>
 
         </div>
     </section>
