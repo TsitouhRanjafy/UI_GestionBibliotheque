@@ -26,11 +26,13 @@ export class CreateAccountComponent {
   lastname = model('');
   email = model('');
   password = model('');
+  isCheked = model(false);
 
   toggleShowPassword: 'text' | 'password' = 'password';
 
   onButtonCliked(): void {
-    console.log('\n firstname:'+this.firstname()+' \n lastname:'+this.lastname()+' \n email:'+this.email()+'\n password:'+this.password());
+    // Sign up 
+    // Redirect 
     
   }
 
