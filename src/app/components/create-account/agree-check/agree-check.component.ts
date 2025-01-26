@@ -5,7 +5,6 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './agree-check.component.html',
-  styleUrl: './agree-check.component.scss'
 })
 export class AgreeCheckComponent {
 

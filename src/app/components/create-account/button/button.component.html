@@ -1,4 +1,9 @@
-<button [routerLink]="[router]" routerLinkActive="router-link-active"  [class]="[background,backgroundactive,textcolor]" class="w-full h-12 font-bold text-lg rounded-lg  flex flex-row items-center justify-center gap-x-2" type="button">
+<button 
+    [class]="[background,backgroundactive,textcolor]" 
+    class="w-full h-12 font-bold text-lg rounded-lg  flex flex-row items-center justify-center gap-x-2" 
+    [type]="type"
+    (click)="buttonClicked()"
+>
     <img width="40" height="40" [src]="iconPath" alt="google" *ngIf="iconPath">     
     {{ title }}
 </button>
