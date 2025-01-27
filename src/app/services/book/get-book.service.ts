@@ -10,7 +10,7 @@ export class GetBookService  {
 
   public lastBooksYouBorrow: WritableSignal<ILivreGet[] | undefined> = signal<ILivreGet[] | undefined>(undefined);
 
-  readonly url = 'http://localhost:4040'
+  private readonly url = 'http://localhost:4040'
 
   constructor(private http: HttpClient){}
 
