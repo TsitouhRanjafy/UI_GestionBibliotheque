@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { computed, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { typeForLogedUser, typeForLogin } from '../../models/user.model';
 
 @Injectable({
@@ -7,10 +7,8 @@ import { typeForLogedUser, typeForLogin } from '../../models/user.model';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
-
-  
-  private isAuthenticated = false;
+  private isAuthenticated: WritableSignal<boolean> = signal(false);
+  public authenticated: Signal<boolean> = computed(() => this.isAuthenticated());
   private readonly url = 'http://localhost:4040';
 
   // login user with email and password
@@ -26,29 +24,45 @@ export class UserService {
         headers: {
           'Content-type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
       })
       if (responose.ok) {
+        this.isAuthenticated.set(true);
         logedUser = await responose.json();
         return logedUser;   
       }
       return logedUser;
     } catch (error) {
-      console.log(' SERVEUR ERROR')
       throw error
     }
   }
 
-  logout() {
-    this.isAuthenticated = false;
+  async logout() {
+    //Supprime le cookie en lui passant une date d'expiration passée
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC'; 
+    this.isAuthenticated.set(false);
   }
 
-  isAAuthenticated(): boolean {
-    return this.isAuthenticated;
-  }
 
-  hello(){
-    console.log('test');
-    
+  async authentification(): Promise<void> {
+    try {
+      const response = await fetch(`${this.url}/welcome`,{
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      if (response.ok) {
+        this.isAuthenticated.set(true);
+        console.log('  authentified');
+        return;
+      }
+      this.isAuthenticated.set(false);
+      return;
+    } catch (error) {
+      throw error
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, inject, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
@@ -13,6 +13,7 @@ import { ILivreGet } from '../../models/livre.model';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { titleOfList } from '../../models/type.model';
 import { NgClass } from '@angular/common';
+import { UserService } from '../../services/users/user.service';
 
 
 @Component({
@@ -54,6 +55,8 @@ export class HomeComponent implements OnInit {
   // pour le all book
   allBooksByPageIndex$!: Observable<ILivreGet[]>;
   pageIndexAllBook: number = 0;
+
+  userSerivec = inject(UserService);
   
 
   // pour le recherche
@@ -123,6 +126,12 @@ export class HomeComponent implements OnInit {
   searchBooksByButtonCliked(value: string): void{
     const result = this.allBooks?.filter((book) => book.titre.includes(value))
     if (result) this.searchResultByClikedButton.set(result);
+  }
+
+  onLogout(): void {
+    console.log(' clear cookies');
+    
+    this.userSerivec.logout();
   }
 
 }
