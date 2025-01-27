@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, Injectable, Signal, signal, WritableSignal } from '@angular/core';
-import { typeForLogedUser, typeForLogin } from '../../models/user.model';
+import { typeForLogedUser, typeForLogin, typeForSignup, typeForSignupUser } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,6 @@ export class UserService {
     this.isAuthenticated.set(false);
   }
 
-
   async authentification(): Promise<void> {
     try {
       const response = await fetch(`${this.url}/welcome`,{
@@ -65,4 +64,28 @@ export class UserService {
       throw error
     }
   }
+
+  async signup(data: typeForSignup): Promise<typeForSignupUser>{
+    let signupData: typeForSignupUser = {
+      status: '',
+      message: '',
+      id: ''
+    }
+    try {
+      const response = await fetch(`${this.url}/signup`,{
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }) 
+      if (response.ok) {
+        this.isAuthenticated.set(true);
+        signupData = await response.json();
+      }
+      return signupData;
+    } catch (error) {
+      throw error
+    }
+  } 
 }

@@ -1,10 +1,13 @@
-import { Component, model } from '@angular/core';
+import { Component, inject, model } from '@angular/core';
 import { InputComponent } from './input/input.component';
 import { AgreeCheckComponent } from "./agree-check/agree-check.component";
 import { ButtonComponent } from "./button/button.component";
 import { OrComponent } from "./or/or.component";
 import { AlreadyComponent } from "./already/already.component";
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { typeForSignupUser } from '../../models/user.model';
+import { UserService } from '../../services/users/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -28,12 +31,25 @@ export class CreateAccountComponent {
   password = model('');
   isCheked = model(false);
 
+  userService = inject(UserService);
+
+  constructor(private router: Router){}
+
   toggleShowPassword: 'text' | 'password' = 'password';
 
-  onButtonCliked(): void {
-    // Sign up 
-    // Redirect 
-    
+  async onButtonCliked(): Promise<void> {
+     try {
+      const signedUser: typeForSignupUser = await this.userService.signup({
+        firstname: this.firstname(),
+        lastname: this.lastname(),
+        email: this.email(),
+        password: this.password()
+      })
+      if (!signedUser.id) return; // il faut annuler le requête ici
+      this.router.navigate(['/home']);
+     } catch (error) {
+      throw error
+     }
   }
 
   onShowPassword(): void {

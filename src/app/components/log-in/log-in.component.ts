@@ -43,17 +43,18 @@ export class LogInComponent {
   }
 
   async onSubmit(): Promise<void> {
+    try {
       const logedUser: typeForLogedUser = await this.userService.login({ 
         email: this.email(),
         password: this.password()
       });
       if (!logedUser.id || !logedUser.token) {
         // Il faut annuler le requet si c'est un Observable
-        console.log('log failed');
         return;
       }
-      console.log('redirect');
       this.router.navigate(['/home']);
-
+    } catch (error) {
+      throw error
+    }
   }
 }

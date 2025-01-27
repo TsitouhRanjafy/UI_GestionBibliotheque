@@ -129,8 +129,6 @@ export class HomeComponent implements OnInit {
   }
 
   onLogout(): void {
-    console.log(' clear cookies');
-    
     this.userSerivec.logout();
   }
 
