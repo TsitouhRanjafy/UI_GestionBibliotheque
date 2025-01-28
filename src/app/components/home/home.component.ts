@@ -1,4 +1,3 @@
-import { lastReadingBooksData } from '../../db/lastreading.db';
 import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, inject, Input, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
