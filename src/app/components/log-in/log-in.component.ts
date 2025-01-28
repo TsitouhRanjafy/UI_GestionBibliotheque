@@ -4,7 +4,7 @@ import { AgreeCheckComponent } from "../create-account/agree-check/agree-check.c
 import { ButtonComponent } from "../create-account/button/button.component";
 import { OrComponent } from "../create-account/or/or.component";
 import { AlreadyComponent } from "../create-account/already/already.component";
-import { UserService } from '../../services/users/user.service';
+import { AuthService } from '../../services/users/user-auth.service';
 import { typeForLogedUser } from '../../models/user.model';
 import { Router } from '@angular/router';
 
@@ -30,7 +30,7 @@ export class LogInComponent {
   email = model('');
   password = model('');
 
-  userService = inject(UserService);
+  userService = inject(AuthService);
 
   constructor(private router: Router){}
 
@@ -52,7 +52,7 @@ export class LogInComponent {
         // Il faut annuler le requet si c'est un Observable
         return;
       }
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home', logedUser.id ]);
     } catch (error) {
       throw error
     }

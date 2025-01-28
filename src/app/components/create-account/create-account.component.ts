@@ -6,7 +6,7 @@ import { OrComponent } from "./or/or.component";
 import { AlreadyComponent } from "./already/already.component";
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { typeForSignupUser } from '../../models/user.model';
-import { UserService } from '../../services/users/user.service';
+import { AuthService } from '../../services/users/user-auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,7 +31,7 @@ export class CreateAccountComponent {
   password = model('');
   isCheked = model(false);
 
-  userService = inject(UserService);
+  userService = inject(AuthService);
 
   constructor(private router: Router){}
 

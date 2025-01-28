@@ -1,5 +1,5 @@
 import { lastReadingBooksData } from '../../db/lastreading.db';
-import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, inject, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component , computed, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, inject, Input, model, OnInit, Output, signal, Signal, WritableSignal } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { CardProfilComponent } from './card-profil/card-profil.component';
 import { HeaderComponent } from "./header/header.component";
@@ -13,7 +13,10 @@ import { ILivreGet } from '../../models/livre.model';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { titleOfList } from '../../models/type.model';
 import { NgClass } from '@angular/common';
+import { AuthService } from '../../services/users/user-auth.service';
+import { User } from '../../models/user.model';
 import { UserService } from '../../services/users/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -36,27 +39,34 @@ import { UserService } from '../../services/users/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  numberAllBook$!: Observable<Object>;
-  titleOfist = titleOfList
-  
-  lastLoanBooksByUser: Signal<ILivreGet[] | undefined> = computed(() => this.getBookService.lastBooksYouBorrow()) 
+  private activatedRouter = inject(ActivatedRoute);
+  id = this.activatedRouter.snapshot.params["id"];
 
-  topBooks$!: Observable<ILivreGet[]>;
+  public numberAllBook$!: Observable<Object>;
+  public titleOfist = titleOfList
+
+  public currentUser: Signal<User> = computed(() => this.userService.currentUser());
+  public lastname: string = '';
+  
+  public lastLoanBooksByUser: Signal<ILivreGet[] | undefined> = computed(() => this.getBookService.lastBooksYouBorrow()) 
+
+  public topBooks$!: Observable<ILivreGet[]>;
 
   // pour le new release
-  newReleaseBooks$!: Observable<ILivreGet[]>;
-  pageIndexNewRelease: number = 0;
-  maxPageIndex: number = 0;
+  public newReleaseBooks$!: Observable<ILivreGet[]>;
+  public pageIndexNewRelease: number = 0;
+  public maxPageIndex: number = 0;
 
   // pour le last loan book
-  lastBorrowBooks$!: Observable<ILivreGet[]>;
-  pageIndexLastBorrow: number = 0;
+  public lastBorrowBooks$!: Observable<ILivreGet[]>;
+  public pageIndexLastBorrow: number = 0;
 
   // pour le all book
-  allBooksByPageIndex$!: Observable<ILivreGet[]>;
-  pageIndexAllBook: number = 0;
+  public allBooksByPageIndex$!: Observable<ILivreGet[]>;
+  public pageIndexAllBook: number = 0;
 
-  userSerivec = inject(UserService);
+  private authSerSerivec = inject(AuthService);
+  private userService = inject(UserService)
   
 
   // pour le recherche
@@ -121,15 +131,23 @@ export class HomeComponent implements OnInit {
       }
     })
     this.getBookService.getLastBookBorrowByUserId();
+    console.log(this.id);
+    
+    this.userService.getUserById(this.id).subscribe({
+      next: (data: User) => {
+        this.lastname = data.lastname;
+      }
+    });
   }
 
   searchBooksByButtonCliked(value: string): void{
     const result = this.allBooks?.filter((book) => book.titre.includes(value))
     if (result) this.searchResultByClikedButton.set(result);
+    console.log(this.currentUser());
+    
   }
 
   onLogout(): void {
-    this.userSerivec.logout();
+    this.authSerSerivec.logout();
   }
-
 }
