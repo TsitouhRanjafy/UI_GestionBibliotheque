@@ -24,8 +24,8 @@ export class HeaderComponent {
   showRelease: boolean = false;
   showFeatured: boolean = false;
 
-  @Input() newRelease: boolean = true;
-  @Input() featured: boolean = true;
+  @Input() newRelease: boolean = false;
+  @Input() featured: boolean = false;
 
   search = model<string>();
   @Output() searchBook : EventEmitter<string> = new EventEmitter() 

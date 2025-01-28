@@ -1,13 +1,11 @@
 import { NgIf } from '@angular/common';
-import { Component , Input, output, Output} from '@angular/core';
+import { Component , Input, output } from '@angular/core';
 import { IEventEmitNotification } from '../../../../models/type.model';
 
 @Component({
   selector: 'app-text-notification',
   standalone: true,
-  imports: [
-    NgIf
-  ],
+  imports: [],
   templateUrl: './text-notification.component.html',
   styleUrl: './text-notification.component.scss'
 })
