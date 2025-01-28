@@ -16,7 +16,7 @@ import { NgClass } from '@angular/common';
 import { AuthService } from '../../services/users/user-auth.service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/users/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit {
 
   private authSerSerivec = inject(AuthService);
   private userService = inject(UserService)
+  private router = inject(Router)
   
 
   // pour le recherche
@@ -131,8 +132,6 @@ export class HomeComponent implements OnInit {
       }
     })
     this.getBookService.getLastBookBorrowByUserId();
-    console.log(this.id);
-    
     this.userService.getUserById(this.id).subscribe({
       next: (data: User) => {
         this.lastname = data.lastname;
@@ -143,11 +142,10 @@ export class HomeComponent implements OnInit {
   searchBooksByButtonCliked(value: string): void{
     const result = this.allBooks?.filter((book) => book.titre.includes(value))
     if (result) this.searchResultByClikedButton.set(result);
-    console.log(this.currentUser());
-    
   }
 
   onLogout(): void {
     this.authSerSerivec.logout();
+    this.router.navigate(['/login']);
   }
 }
