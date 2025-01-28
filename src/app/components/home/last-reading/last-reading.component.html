@@ -13,7 +13,11 @@
     >       
         @if (lastReadingBooks) {
             <swiper-slide class="w-1/2 h-full " *ngFor="let lastReadingBook of lastReadingBooks">
-                <app-single-book-details [title]="lastReadingBook.titre" [genre]="lastReadingBook.genre"/>  
+                <app-single-book-details 
+                    [title]="lastReadingBook.titre" 
+                    [genre]="lastReadingBook.genre"
+                    [imageUrl]="lastReadingBook.id"
+                />  
             </swiper-slide>
         }
 
