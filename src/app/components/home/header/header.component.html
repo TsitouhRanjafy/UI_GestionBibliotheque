@@ -1,19 +1,20 @@
 <main class="flex flex-col py-2">
 
     
-    <section class="flex flex-row h-14">
-        <div class="overflow-hidden" id="logo">
-            <app-logo/>
+    <section class=" flex flex-row justify-between h-14 border-[1px] border-blue">
+        <!-- LOGO -->
+        <app-logo
+            class="border-[1px] border-redpropre"
+        />
+        <div class="absolute w-96 left-1/2 translate-x-[-50%] top-8 border-[1px] border-redpropre">
+            <app-search-bar
+                class="left-0"
+                [(search)]="search"
+                (searchCliked)="searchCliked($event)"
+             />
         </div>
-        <div class="flex flex-row" id="outils">
-            <div class="flex flex-row justify-evenly items-center ml-20 mr-10 overflow-hidden w-full">
-                <div class="w-96">
-                    <app-search-bar
-                        class="left-0"
-                        [(search)]="search"
-                        (searchCliked)="searchCliked($event)"
-                     />
-                </div>
+        <!-- Notification button -->
+        <div class="border-[1px] border-bluepropre gap-6 flex flex-row items-center ml-20 mr-10 overflow-hidden w-fit">
                 <app-text-notification 
                     class="cursor-pointer" 
                     title="New Release" 
@@ -39,11 +40,10 @@
                         </defs>
                     </svg>               
                 </div>
-            </div>
         </div>
     </section>
 
-    <section class="w-1/4 flex flex-col  bg-blackprimary absolute mt-14 h-2/3 right-0 rounded-l-lg z-30 Hidden" [ngClass]="showRelease? 'toggleHidden':'a' ">
+    <section class="w-1/4 flex flex-col  bg-blackprimary absolute mt-14 h-[100%] right-0 rounded-l-lg z-30 Hidden" [ngClass]="showRelease? 'toggleHidden':'a' ">
         <div class="w-full flex flex-row justify-between items-center p-5">
             <p class="select-none text-sm text-primary ">New Release</p>
             <div class="w-9 h-9 flex justify-center items-center hover:bg-secondary active:bg-thirty rounded-md" (click)="hiddenNotificationCard()" >
@@ -57,7 +57,7 @@
         </div>
     </section>
 
-    <section class="w-1/4 flex flex-col bg-blackprimary absolute mt-14 h-2/3 right-0 rounded-lg z-30 Hidden" [ngClass]="showFeatured? 'toggleHidden': 'a' ">
+    <section class="w-1/4 flex flex-col bg-blackprimary absolute mt-14 h-[100%] right-0 rounded-lg z-30 Hidden" [ngClass]="showFeatured? 'toggleHidden': 'a' ">
         <div class="w-full flex flex-row justify-between items-center p-5">
             <p class="select-none text-sm text-primary ">Featured</p>
             <div class="w-9 h-9 flex justify-center items-center hover:bg-secondary active:bg-thirty rounded-md" (click)="hiddenNotificationCard()" >

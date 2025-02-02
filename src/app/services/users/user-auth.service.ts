@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { typeForLogedUser, typeForLogin, typeForSignup, typeForSignupUser } from '../../models/user.model';
+import { JwtPayload } from 'jsonwebtoken';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ export class AuthService {
 
   private isAuthenticated: WritableSignal<boolean> = signal(false);
   public authenticated: Signal<boolean> = computed(() => this.isAuthenticated());
+  public idUserAuthentified: WritableSignal<string> = signal('');
   private readonly url = 'http://localhost:4040';
 
   // login user with email and password
@@ -56,10 +57,15 @@ export class AuthService {
       if (response.ok) {
         this.isAuthenticated.set(true);
         console.log('  authentified');
+        const playloadUser: {
+          status: string,
+          message: JwtPayload
+        } = await response.json();
+        console.log(playloadUser);
+        this.idUserAuthentified.set(playloadUser.message['id']);
         return;
       }
       this.isAuthenticated.set(false);
-      return;
     } catch (error) {
       throw error
     }

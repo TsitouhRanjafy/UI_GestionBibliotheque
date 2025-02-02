@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
     this.getBookService.getLastBookBorrowByUserId();
     this.userService.getUserById(this.id).subscribe({
       next: (data: User) => {
-        this.lastname = data.lastname;
+        this.lastname = data.firstname;
       }
     });
   }

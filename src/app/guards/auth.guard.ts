@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn,  CanMatchFn } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/users/user-auth.service';
 
-export const authGuard: CanActivateFn = async (route, state) => {
 
+export const authGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
+  const authService = inject(AuthService);
   try {
-    const authService = inject(AuthService)
     await authService.authentification();
     const isAuthenticated: boolean = authService.authenticated();
     if (isAuthenticated){
@@ -18,3 +18,5 @@ export const authGuard: CanActivateFn = async (route, state) => {
   }
   return router.parseUrl('/login');     
 };
+
+
