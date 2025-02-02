@@ -24,3 +24,16 @@ main{
         }
     }
 }
+
+#badge:hover{
+    svg{
+        filter: brightness(0) saturate(100%) invert(91%) sepia(4%) saturate(125%) hue-rotate(180deg);
+    }
+}
+
+#container-icon-hidden:hover,
+#container-icon-hidden-2:hover{
+    svg{
+        stroke: #ecf0f1;
+    }
+}

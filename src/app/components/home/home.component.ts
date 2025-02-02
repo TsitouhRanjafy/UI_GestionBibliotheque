@@ -97,10 +97,10 @@ export class HomeComponent implements OnInit {
       case titleOfList.LastBorrow:
         if (value.isNext){
           this.pageIndexLastBorrow++
-          this.lastBorrowBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexLastBorrow);
+          // this.lastBorrowBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexLastBorrow);
         }  else if (this.pageIndexLastBorrow > 0) {
           this.pageIndexLastBorrow--
-          this.lastBorrowBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexLastBorrow);
+          // this.lastBorrowBooks$ = this.getBookService.getNewReleaseBook(this.pageIndexLastBorrow);
         }
         break;
       case titleOfList.AllBook:
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
     this.getBookService.getAllBooks().subscribe({
       next: (data: ILivreGet[]) => {
         this.allBooks = data;
-      }
+      }   
     })
     this.getBookService.getLastBookBorrowByUserId();
     this.userService.getUserById(this.id).subscribe({

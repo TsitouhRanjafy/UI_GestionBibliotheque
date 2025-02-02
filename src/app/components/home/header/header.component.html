@@ -1,12 +1,11 @@
 <main class="flex flex-col py-2">
 
     
-    <section class=" flex flex-row justify-between h-14 border-[1px] border-blue">
+    <section class=" flex flex-row justify-between h-14">
         <!-- LOGO -->
         <app-logo
-            class="border-[1px] border-redpropre"
         />
-        <div class="absolute w-96 left-1/2 translate-x-[-50%] top-8 border-[1px] border-redpropre">
+        <div class="absolute w-96 left-1/2 translate-x-[-50%] top-8">
             <app-search-bar
                 class="left-0"
                 [(search)]="search"
@@ -14,7 +13,7 @@
              />
         </div>
         <!-- Notification button -->
-        <div class="border-[1px] border-bluepropre gap-6 flex flex-row items-center ml-20 mr-10 overflow-hidden w-fit">
+        <div class="gap-6 flex flex-row items-center ml-20 mr-10 overflow-hidden w-fit">
                 <app-text-notification 
                     class="cursor-pointer" 
                     title="New Release" 
@@ -29,7 +28,7 @@
                     [toggleNotificationShow]="showFeatured"
                     (onChangeRelease)="toggleCardNotification($event)"
                 />
-                <div class="p-1 hover:bg-bluehover active:bg-blueactive rounded-md">
+                <div id="badge" class="p-1 hover:bg-bluehover active:bg-blueactive rounded-md">
                     <svg class="r right-0" width="24" height="24" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="42" height="42" fill="url(#pattern0_2052_34)"/>
                         <defs>
@@ -43,10 +42,10 @@
         </div>
     </section>
 
-    <section class="w-1/4 flex flex-col  bg-blackprimary absolute mt-14 h-[100%] right-0 rounded-l-lg z-30 Hidden" [ngClass]="showRelease? 'toggleHidden':'a' ">
+    <section class="w-1/4 flex flex-col  bg-whiteprimary absolute mt-14 h-[100%] right-0 rounded-l-lg z-30 Hidden" [ngClass]="showRelease? 'toggleHidden':'a' ">
         <div class="w-full flex flex-row justify-between items-center p-5">
             <p class="select-none text-sm text-primary ">New Release</p>
-            <div class="w-9 h-9 flex justify-center items-center hover:bg-secondary active:bg-thirty rounded-md" (click)="hiddenNotificationCard()" >
+            <div id="container-icon-hidden" class="w-9 h-9 flex justify-center items-center hover:bg-bluehover active:bg-blueactive  rounded-md" (click)="hiddenNotificationCard()" >
                 <svg width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>              
@@ -57,10 +56,10 @@
         </div>
     </section>
 
-    <section class="w-1/4 flex flex-col bg-blackprimary absolute mt-14 h-[100%] right-0 rounded-lg z-30 Hidden" [ngClass]="showFeatured? 'toggleHidden': 'a' ">
+    <section class="w-1/4 flex flex-col bg-whiteprimary absolute mt-14 h-[100%] right-0 rounded-lg z-30 Hidden" [ngClass]="showFeatured? 'toggleHidden': 'a' ">
         <div class="w-full flex flex-row justify-between items-center p-5">
             <p class="select-none text-sm text-primary ">Featured</p>
-            <div class="w-9 h-9 flex justify-center items-center hover:bg-secondary active:bg-thirty rounded-md" (click)="hiddenNotificationCard()" >
+            <div id="container-icon-hidden-2" class="w-9 h-9 flex justify-center items-center hover:bg-bluehover active:bg-blueactive  rounded-md" (click)="hiddenNotificationCard()" >
                 <svg width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>              

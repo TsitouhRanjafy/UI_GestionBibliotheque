@@ -2,7 +2,7 @@
 
     <div class="w-2/5 h-full flex flex-row justify-center items-center relative">
 
-        <div class="w-book h-book  rounded-xl overflow-hidden z-20 ml-2">
+        <div class="w-[90px] h-[150px]  rounded-xl overflow-hidden z-20 ml-2">
             <img class="h-full w-full select-none" [src]="imageUrl" alt="" loading="lazy">
         </div>
         <div class="absolute  w-full h-2/3 bottom-0 rounded-l-xl z-10 bg-blackprimary">
@@ -12,9 +12,9 @@
 
     <div class="w-3/5 h-2/3 bottom-0 right-0 absolute flex justify-center items-center rounded-r-xl bg-blackprimary px-2  overflow-hidden">
         <div class="h-fit overflow-hidden">
-            <p class="font-bold text-base select-none line-clamp-2">{{ title }}</p>
-            <p class="text-xs mt-1 select-none">{{ genre }}</p>
-            <p class="text-xs select-none">Retourn data: {{ dateRetoure.toDateString() }}</p>
+            <p class="font-bold text-base text-[#ecf0f1] select-none line-clamp-2">{{ title }}</p>
+            <p class="text-xs mt-1 select-none text-[#ecf0f1] ">{{ genre }}</p>
+            <p class="text-xs select-none text-[#ecf0f1] ">Retourn date: {{ dateRetoure.toDateString() }}</p>
         </div>
     </div>
 

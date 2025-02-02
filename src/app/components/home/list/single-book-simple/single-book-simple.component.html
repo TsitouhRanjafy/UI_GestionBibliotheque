@@ -1,4 +1,4 @@
-<main class="w-full flex flex-col justify-center items-center py-2 ">
+<main class="w-full flex flex-col justify-center items-center py-2 hover:text-[#ecf0f1] ">
     <div class="overflow-hidden rounded-xl h-book w-book select-none ">
         @if (imageUrl) {
             <img class="h-full w-full" [src]='imageUrl' alt="">
@@ -11,6 +11,6 @@
         <p class="text-[9px] font-medium text-nowrap">{{ book.auteur }}</p>
     </div>
     <div class="w-book flex flex-row justify-center rounded-xl">
-        <p class="bg-blackprimary rounded-full text-[9px] px-2 select-none line-clamp-1">{{ book.genre }}</p>
+        <p class="bg-blackprimary rounded-full text-[9px] px-2 select-none line-clamp-1 text-[#ecf0f1]">{{ book.genre }}</p>
     </div>
 </main>

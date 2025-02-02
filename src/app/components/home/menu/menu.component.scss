@@ -9,6 +9,13 @@ main{
         // border: 1px solid red;
         &:nth-child(1){
             flex: 2;
+            ul {
+                div:hover {
+                    svg{
+                        filter: brightness(0) saturate(100%) invert(91%) sepia(4%) saturate(125%) hue-rotate(180deg);
+                    }
+                }
+            }
         }
         &:nth-child(2){
             flex: 1;

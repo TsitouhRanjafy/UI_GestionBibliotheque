@@ -23,7 +23,7 @@ export class GetBookService  {
   }
 
   getNewReleaseBook(pageIndex: number): Observable<ILivreGet[]>{
-    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${7}/4`);
+    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*6}/${6}/4`);
   }
 
   getLastBorrowBook(): Observable<ILivreGet[]> {
@@ -31,7 +31,7 @@ export class GetBookService  {
   }
 
   getAllBooksByPageIndex(pageIndex: number): Observable<ILivreGet[]>{
-    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*7}/${7}`);
+    return this.http.get<ILivreGet[]>(this.url+`/books/${pageIndex*6}/${6}`);
   }
 
   getAllBooks(): Observable<ILivreGet[]>  {
