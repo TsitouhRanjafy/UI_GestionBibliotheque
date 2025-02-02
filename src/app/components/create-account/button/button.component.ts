@@ -16,7 +16,7 @@ export class ButtonComponent {
 
   @Input() iconPath: string = ''
   @Input() title: string = ''
-  @Input() background: 'bg-bluehover' | 'bg-blueactive' | 'bg-[#ecf0f1]' = 'bg-bluehover'
+  @Input() background: 'bg-bluehover' | 'bg-blueactive' | 'bg-whitepropre' = 'bg-bluehover'
   @Input() backgroundactive: string = 'active:bg-blueactive'
   @Input() textcolor: 'text-primary' | 'text-whitepropre' = 'text-whitepropre'
   @Input() type: string = 'button';

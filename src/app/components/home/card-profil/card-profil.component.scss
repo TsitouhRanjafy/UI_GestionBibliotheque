@@ -3,14 +3,5 @@ main{
         &.container{
             background: linear-gradient(316deg, #2c3e50 0%, #2c3e50 100%);
         }
-        div{
-            // background-color: #242424;
-            div{
-                &:nth-child(1){
-                        // background-color: #313131;
-                        // border: solid 1px #242424;
-                }
-            }
-        }
     }
 }
